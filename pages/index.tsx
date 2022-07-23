@@ -1,4 +1,4 @@
-import { ActionIcon, Button, Grid, Image, useMantineColorScheme } from '@mantine/core';
+import { ActionIcon, Button, Container, Grid, Image, useMantineColorScheme } from '@mantine/core';
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link';
@@ -6,10 +6,6 @@ import styled from 'styled-components'
 import { MdNightlightRound } from 'react-icons/md'
 import { HiLightBulb } from 'react-icons/hi'
 import Cards from '../components/Card';
-
-const Container = styled.div`
-  
-`;
 
 const Home: NextPage = () => {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
@@ -34,7 +30,7 @@ const Home: NextPage = () => {
         </ActionIcon>
       </Container>
 
-      <div>
+      {/* <Container>
         <Grid>
           <Grid.Col span={4}>
             <Cards />
@@ -46,7 +42,7 @@ const Home: NextPage = () => {
             <Cards />
           </Grid.Col>
         </Grid>
-      </div>
+      </Container> */}
 
     </div>
   )
