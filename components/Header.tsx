@@ -4,9 +4,11 @@ import logo from '../assets/logo.png'
 import { BiVideoPlus, BiBell } from 'react-icons/bi'
 import { RiVideoLine } from 'react-icons/ri'
 import { CgLivePhoto } from 'react-icons/cg'
-import { Avatar, createStyles, Header, Autocomplete, Group, Burger, Menu, Tooltip, ActionIcon } from '@mantine/core';
+import { Avatar, createStyles, Header, Autocomplete, Group, Burger, Menu, Tooltip, ActionIcon, useMantineColorScheme } from '@mantine/core';
 import { useBooleanToggle } from '@mantine/hooks';
 import { Search } from 'tabler-icons-react';
+import { MdNightlightRound } from 'react-icons/md'
+import { HiLightBulb } from 'react-icons/hi'
 
 const useStyles = createStyles((theme) => ({
     header: {
@@ -44,6 +46,8 @@ const useStyles = createStyles((theme) => ({
 export function HeaderSearch() {
     const [opened, toggleOpened] = useBooleanToggle(false);
     const { classes } = useStyles();
+    const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+    const dark = colorScheme === 'dark';
 
     return (
         <Header height={56} className={classes.header} mb={120}>
@@ -61,6 +65,16 @@ export function HeaderSearch() {
                 />
 
                 <Group spacing={20} className={classes.social} position="right" noWrap>
+                    <Tooltip label="Dark/Light" position="bottom" placement="end">
+                        <ActionIcon
+                            variant="outline"
+                            color={dark ? 'yellow' : 'blue'}
+                            onClick={() => toggleColorScheme()}
+                            title="Toggle color scheme"
+                        >
+                            {dark ? <MdNightlightRound size={18} /> : <HiLightBulb size={18} />}
+                        </ActionIcon>
+                    </Tooltip>
                     <Menu control={
                         <Tooltip label="Create" position="bottom" placement="end">
                             <ActionIcon size='xl' radius='xl'>
