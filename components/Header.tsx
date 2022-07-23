@@ -14,6 +14,9 @@ const useStyles = createStyles((theme) => ({
     header: {
         paddingLeft: theme.spacing.md,
         paddingRight: theme.spacing.md,
+        color: theme.colorScheme === 'dark' ? theme.white : theme.black,
+        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.white,
+        // borderBottom: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]}`,
     },
 
     inner: {
@@ -50,7 +53,7 @@ export function HeaderSearch() {
     const dark = colorScheme === 'dark';
 
     return (
-        <Header height={56} className={classes.header} mb={120}>
+        <Header height={56} className={classes.header}>
             <div className={classes.inner}>
                 <Group>
                     <Burger opened={opened} onClick={() => toggleOpened()} size="sm" />
