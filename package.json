@@ -18,7 +18,7 @@
     "@mantine/next": "^4.2.12",
     "@mantine/notifications": "^4.2.12",
     "@mantine/prism": "^4.2.12",
-    "@mantine/rte": "^3.4.3",
+    "@mantine/rte": "3.6.14",
     "@mantine/spotlight": "^4.2.12",
     "dayjs": "^1.11.4",
     "next": "12.2.3",
