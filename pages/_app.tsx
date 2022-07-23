@@ -1,25 +1,45 @@
-import type { AppProps } from 'next/app'
-import { NextPageWithLayout } from '../types';
+import { AppProps } from 'next/app';
+import Head from 'next/head';
+import { MantineProvider, ColorSchemeProvider, ColorScheme } from '@mantine/core';
+import { useHotkeys, useLocalStorage } from '@mantine/hooks';
 import Layout from '../components/Layout';
-import '../styles/globals.css'
+import '../styles/globals.css';
 
-// this should give a better typing
-type AppPropsWithLayout = AppProps & {
-  Component: NextPageWithLayout;
-};
+export default function App(props: AppProps) {
+  const { Component, pageProps } = props;
 
-const MyApp = ({
-  Component,
-  pageProps: { ...pageProps },
-}: AppPropsWithLayout) => {
-  // adjust accordingly if you disabled a layout rendering option
-  const getLayout = Component.getLayout ?? ((page) => page);
+  const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
+    key: 'mantine-color-scheme',
+    defaultValue: 'light',
+    // getInitialValueInEffect: true,
+  });
 
-  return getLayout(
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
-  )
+  const toggleColorScheme = (value?: ColorScheme) =>
+    setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
+
+  useHotkeys([['mod+J', () => toggleColorScheme()]]);
+
+  return (
+    <>
+      <Head>
+        <title>Youtube</title>
+        <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
+      </Head>
+
+      <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
+        <MantineProvider
+          withGlobalStyles
+          withNormalizeCSS
+          theme={{
+            /** Put your mantine theme override here */
+            colorScheme,
+          }}
+        >
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </MantineProvider>
+      </ColorSchemeProvider>
+    </>
+  );
 }
-
-export default MyApp
