@@ -5,10 +5,10 @@ import { BiVideoPlus, BiBell } from 'react-icons/bi'
 import { RiVideoLine } from 'react-icons/ri'
 import { CgLivePhoto } from 'react-icons/cg'
 import { Avatar, createStyles, Header, Autocomplete, Group, Burger, Menu, Tooltip, ActionIcon, useMantineColorScheme } from '@mantine/core';
-import { useBooleanToggle } from '@mantine/hooks';
 import { Search } from 'tabler-icons-react';
 import { MdNightlightRound } from 'react-icons/md'
 import { HiLightBulb } from 'react-icons/hi'
+import { IconMenu2 } from '@tabler/icons';
 
 const useStyles = createStyles((theme) => ({
     header: {
@@ -47,7 +47,6 @@ const useStyles = createStyles((theme) => ({
 
 
 export function HeaderSearch() {
-    const [opened, toggleOpened] = useBooleanToggle(false);
     const { classes } = useStyles();
     const { colorScheme, toggleColorScheme } = useMantineColorScheme();
     const dark = colorScheme === 'dark';
@@ -56,7 +55,7 @@ export function HeaderSearch() {
         <Header height={56} className={classes.header}>
             <div className={classes.inner}>
                 <Group>
-                    <Burger opened={opened} onClick={() => toggleOpened()} size="sm" />
+                    <IconMenu2 size={18} />
                     <Image src={logo} alt="logo" width={120} height={26} />
                 </Group>
 
@@ -68,7 +67,7 @@ export function HeaderSearch() {
                 />
 
                 <Group spacing={20} className={classes.social} position="right" noWrap>
-                    <Tooltip label="Dark/Light" position="bottom" placement="end">
+                    <Tooltip label="Dark/Light" position="bottom">
                         <ActionIcon
                             variant="outline"
                             color={dark ? 'yellow' : 'blue'}
@@ -78,31 +77,39 @@ export function HeaderSearch() {
                             {dark ? <MdNightlightRound size={18} /> : <HiLightBulb size={18} />}
                         </ActionIcon>
                     </Tooltip>
-                    <Menu control={
-                        <Tooltip label="Create" position="bottom" placement="end">
+                    <Menu width={200} shadow="md" position="bottom-end">
+                        <Menu.Target>
                             <ActionIcon size='xl' radius='xl'>
                                 <BiVideoPlus size={20} />
                             </ActionIcon>
-                        </Tooltip>
-                    }>
-                        <Menu.Item icon={<RiVideoLine size={14} />}>Settings</Menu.Item>
-                        <Menu.Item icon={<CgLivePhoto size={14} />}>Messages</Menu.Item>
+                        </Menu.Target>
+
+                        <Menu.Dropdown>
+                            <Menu.Item icon={<RiVideoLine size={14} />}>Upload Video</Menu.Item>
+                            <Menu.Item icon={<CgLivePhoto size={14} />}>Go Live</Menu.Item>
+                        </Menu.Dropdown>
                     </Menu>
-                    <Menu control={
-                        <Tooltip label="Notifications" position="bottom" placement="end">
+                    <Menu width={200} shadow="md" position="bottom-end">
+                        <Menu.Target>
                             <ActionIcon size='xl' radius='xl'>
                                 <BiBell size={20} />
                             </ActionIcon>
-                        </Tooltip>
-                    }>
-                        <Menu.Item icon={<RiVideoLine size={14} />}>Settings</Menu.Item>
-                        <Menu.Item icon={<CgLivePhoto size={14} />}>Messages</Menu.Item>
+                        </Menu.Target>
+
+                        <Menu.Dropdown>
+                            <Menu.Item icon={<RiVideoLine size={14} />}>Settings</Menu.Item>
+                            <Menu.Item icon={<CgLivePhoto size={14} />}>Messages</Menu.Item>
+                        </Menu.Dropdown>
                     </Menu>
-                    <Menu control={
-                        <Avatar src={null} alt="no image here" size='md' radius='xl' />
-                    }>
-                        <Menu.Item icon={<RiVideoLine size={14} />}>Settings</Menu.Item>
-                        <Menu.Item icon={<CgLivePhoto size={14} />}>Messages</Menu.Item>
+                    <Menu width={200} shadow="md" position="bottom-end">
+                        <Menu.Target>
+                            <Avatar src={null} alt="no image here" size='md' radius='xl' />
+                        </Menu.Target>
+
+                        <Menu.Dropdown>
+                            <Menu.Item icon={<RiVideoLine size={14} />}>Settings</Menu.Item>
+                            <Menu.Item icon={<CgLivePhoto size={14} />}>Messages</Menu.Item>
+                        </Menu.Dropdown>
                     </Menu>
                 </Group>
             </div>
