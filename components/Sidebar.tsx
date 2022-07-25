@@ -58,94 +58,75 @@ const useStyles = createStyles((theme) => ({
     }
 }));
 
+const mainMenu = [
+    { icon: GrHomeRounded, label: 'Home', link: '/' },
+    { icon: MdOutlineExplore, label: 'Explore', link: '/' },
+    { icon: MdLocalPlay, label: 'Shorts', link: '/' },
+    { icon: BsPlayBtn, label: 'Subscription', link: '/' },
+];
+
+const library = [
+    { icon: MdVideoLibrary, label: 'Library', link: '/' },
+    { icon: MdOutlineHistory, label: 'History', link: '/' },
+    { icon: MdLocalPlay, label: 'Shorts', link: '/' },
+    { icon: BsPlayBtn, label: 'Subscription', link: '/' },
+];
+
+const exploreMenu = [
+    { icon: MdOutlineLibraryMusic, label: 'Music', link: '/' },
+    { icon: MdSportsBasketball, label: 'Sport', link: '/' },
+    { icon: SiYoutubegaming, label: 'Gaming', link: '/' },
+    { icon: FaRegNewspaper, label: 'News', link: '/' },
+    { icon: CgMediaLive, label: 'Live', link: '/' },
+    { icon: Md360, label: '360° Video', link: '/' },
+];
+
 function Sidebar() {
     const { classes } = useStyles();
+
+    const menus = mainMenu.map((menu, index) => (
+        <Link href={menu.link} key={index}>
+            <a className={classes.navbarLink}>
+                <menu.icon className={classes.navbarIcon} />
+                <Text size="sm">{menu.label}</Text>
+            </a>
+        </Link>
+    ));
+
+    const librarys = library.map((menu, index) => (
+        <Link href={menu.link} key={index}>
+            <a className={classes.navbarLink}>
+                <menu.icon className={classes.navbarIcon} />
+                <Text size="sm">{menu.label}</Text>
+            </a>
+        </Link>
+    ));
+
+    const explores = exploreMenu.map((menu, index) => (
+        <Link href={menu.link} key={index}>
+            <a className={classes.navbarLink}>
+                <menu.icon className={classes.navbarIcon} />
+                <Text size="sm">{menu.label}</Text>
+            </a>
+        </Link>
+    ));
 
     return (
         <aside>
             <Navbar width={{ sm: 300 }} className={classes.navbar}>
                 <Navbar.Section grow className={classes.links} component={ScrollArea} mx="-xs" px="xs">
-                    <Link href="/">
-                        <a className={classes.navbarLink}>
-                            <GrHomeRounded className={classes.navbarIcon} />
-                            <Text size="sm">Home</Text>
-                        </a>
-                    </Link>
-                    <Link href="/">
-                        <a className={classes.navbarLink}>
-                            <MdOutlineExplore className={classes.navbarIcon} />
-                            <Text size="sm">Explore</Text>
-                        </a>
-                    </Link>
-                    <Link href="/">
-                        <a className={classes.navbarLink}>
-                            <MdLocalPlay className={classes.navbarIcon} />
-                            <Text size="sm">Shorts</Text>
-                        </a>
-                    </Link>
-                    <Link href="/">
-                        <a className={classes.navbarLink}>
-                            <BsPlayBtn className={classes.navbarIcon} />
-                            <Text size="sm">Subscription</Text>
-                        </a>
-                    </Link>
+                    {menus}
                     <Divider my="sm" />
-                    <Link href="/">
-                        <a className={classes.navbarLink}>
-                            <MdVideoLibrary className={classes.navbarIcon} />
-                            <Text size="sm">Library</Text>
-                        </a>
-                    </Link>
-                    <Link href="/">
-                        <a className={classes.navbarLink}>
-                            <MdOutlineHistory className={classes.navbarIcon} />
-                            <Text size="sm">History</Text>
-                        </a>
-                    </Link>
+                    {librarys}
                     <Divider my="sm" />
                     <div className={classes.sidebarSignIn}>
-                        <Text color='gray' size="md" weight={600} mb="15px">Sign in to like videos, comment and subscribe.</Text>
+                        <Text color="#fff5f5" size="md" weight={600} mb="15px">Sign in to like videos, comment and subscribe.</Text>
                         <Button leftIcon={<UserCircle/>} size="md" uppercase variant="outline">
                             Sign in
                         </Button>
                     </div>
                     <Divider my="sm" />
-                    <Link href="/">
-                        <a className={classes.navbarLink}>
-                            <MdOutlineLibraryMusic className={classes.navbarIcon} />
-                            <Text size="sm">Music</Text>
-                        </a>
-                    </Link>
-                    <Link href="/">
-                        <a className={classes.navbarLink}>
-                            <MdSportsBasketball className={classes.navbarIcon} />
-                            <Text size="sm">Sport</Text>
-                        </a>
-                    </Link>
-                    <Link href="/">
-                        <a className={classes.navbarLink}>
-                            <SiYoutubegaming className={classes.navbarIcon} />
-                            <Text size="sm">Gaming</Text>
-                        </a>
-                    </Link>
-                    <Link href="/">
-                        <a className={classes.navbarLink}>
-                            <FaRegNewspaper className={classes.navbarIcon} />
-                            <Text size="sm">News</Text>
-                        </a>
-                    </Link>
-                    <Link href="/">
-                        <a className={classes.navbarLink}>
-                            <CgMediaLive className={classes.navbarIcon} />
-                            <Text size="sm">Live</Text>
-                        </a>
-                    </Link>
-                    <Link href="/">
-                        <a className={classes.navbarLink}>
-                            <Md360 className={classes.navbarIcon} />
-                            <Text size="sm">360° Video</Text>
-                        </a>
-                    </Link>
+                    {explores}
                 </Navbar.Section>
             </Navbar>
         </aside>
